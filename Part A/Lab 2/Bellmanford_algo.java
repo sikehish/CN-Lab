@@ -56,7 +56,7 @@ class Graph {
     }
 }
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -73,7 +73,7 @@ public class Main {
             int s = scanner.nextInt();
             int d = scanner.nextInt();
             int w = scanner.nextInt();
-            g.addEdge(s, d, w);
+            g.addEdge(i, d, w);  // Fix: Use 'i' as the index for the source vertex
         }
 
         System.out.print("Enter source node: ");
