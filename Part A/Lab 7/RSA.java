@@ -1,5 +1,5 @@
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import java.util.Random;
 import java.util.Scanner;
 
 public class RSA {
@@ -13,7 +13,7 @@ public class RSA {
     }
 
     private void generateKeyPairs(int bitLength) {
-        SecureRandom random = new SecureRandom();
+        Random random = new Random();
         BigInteger p = BigInteger.probablePrime(bitLength, random);
         BigInteger q = BigInteger.probablePrime(bitLength, random);
 
