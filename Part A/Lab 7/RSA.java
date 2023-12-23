@@ -53,12 +53,14 @@ public class RSA {
         originalMessage=sc.nextLine();
 
         BigInteger message = new BigInteger(originalMessage.getBytes());
-
+        // String->byte array->BigInteger
+        
         BigInteger encryptedMessage = rsa.encrypt(message);
         System.out.println("Encrypted message: " + encryptedMessage);
-
+        
         BigInteger decryptedMessage = rsa.decrypt(encryptedMessage);
         System.out.println("Decrypted message: " + new String(decryptedMessage.toByteArray()));
+        // BigInteger->byte array->String
     }
 }
 
