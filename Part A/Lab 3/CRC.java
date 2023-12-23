@@ -10,12 +10,13 @@ public class CRC {
             }
         }
     
-        for (int i = 0; i < rem.length() - poly.length() + 1; i++) {
+        for (int i = 0; i < data.length(); i++) {
             if (rem.charAt(i) == '1') {
                 String temp = "";
                 for (int j = 0; j < poly.length(); j++) {
                     temp += (rem.charAt(i + j) == poly.charAt(j)) ? '0' : '1';
                 }
+                System.out.println("HAHAH: "+ temp);
                 rem = rem.substring(0, i) + temp + rem.substring(i + poly.length());
             }
         }

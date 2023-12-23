@@ -26,8 +26,13 @@ public class BellmanFord {
                     distance[edge.destination] = distance[edge.source] + edge.weight;
                 }
             }
+        //     System.out.println("Shortest distances from source vertex " + source + ":");
+        // for (int j = 0; j < vertices; j++) {
+        //     System.out.println("To vertex " + j + ": " + distance[j]);
+        // }
         }
 
+          //Checking for negative edge cycle
         for (Edge edge : edges) {
             if (distance[edge.source] != Integer.MAX_VALUE && distance[edge.source] + edge.weight < distance[edge.destination]) {
                 System.out.println("Graph contains a negative cycle!");
