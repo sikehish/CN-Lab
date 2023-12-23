@@ -4,9 +4,11 @@ import java.util.Scanner;
 
 public class RSA {
 
-    private BigInteger privateKey;
-    private BigInteger publicKey;
-    private BigInteger modulus;
+    //5 components: message(m), p,q,n,phi,e,d
+
+    private BigInteger d; // private key
+    private BigInteger e; // public key
+    private BigInteger n; // modulus OR n=p*q
 
     public RSA(int bitLength) {
         generateKeyPairs(bitLength);
@@ -17,20 +19,27 @@ public class RSA {
         BigInteger p = BigInteger.probablePrime(bitLength, random);
         BigInteger q = BigInteger.probablePrime(bitLength, random);
 
-        modulus = p.multiply(q);
+        n = p.multiply(q);
 
-        BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+        BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)); //φ(n) = (p-1) * (q-1).
 
-        publicKey = new BigInteger("65537"); // Commonly used public exponent
-        privateKey = publicKey.modInverse(phi);
+        // Choose public exponent 'e' such that 1 < e < φ(n) and e is coprime to φ(n)
+        e = BigInteger.probablePrime(bitLength / 2, random);
+
+        while(phi.gcd(e).intValue() > 1) {
+            e = e.add(BigInteger.ONE);
+        }
+
+        // Calculate the d such that (d * e) % φ(n) = 1.
+        d = e.modInverse(phi); // (e-1)%phi
     }
 
     public BigInteger encrypt(BigInteger message) {
-        return message.modPow(publicKey, modulus);
+        return message.modPow(e, n);  //c ≡ m^e (mod n).
     }
 
     public BigInteger decrypt(BigInteger encryptedMessage) {
-        return encryptedMessage.modPow(privateKey, modulus);
+        return encryptedMessage.modPow(d, n); //m ≡ c^d (mod n).
     }
 
     public static void main(String[] args) {
@@ -55,6 +64,6 @@ public class RSA {
 
 
 // Output 
-// Enter a string: Hi I am Hisham
-// Encrypted message: 10365988828612849972949436812100863110687643054851274454592305819297960894211366371150428108145561472906016590714562575158416260764996873599308514248228248352667803306207078393803947719196035444400918635841382570952092396721827268118041367712761966913951669038094724335525471474847840503086703842508846043038805496242001346171346985945743841790665517087181525682136266282291982472549137896363990515617141472300805040008391814384080556649571344308463018981319322066436650241409057470506612257953197083073565537741191229671458871630418294180981628868678266572792367632926411505670630267646075430667196593113851414373764
-// Decrypted message: Hi I am Hisham
+// Enter a string: ulteriorNewt's got some moves
+// Encrypted message: 12707778386607386062916512873933191455785217269554116925043952693439289429621384705410951184730357091201378061293405277218353249162655333072548268394031019986933042139787027361671966655501471883499131619252385790194371767391395220090869149143495972458893935114928588430909694540586012074786391245213949928106697145091158451081104138734992403423075240996439188686154751712194263657573094787032866784243133503780155382112054306971307984372324787898300167297657652632041773809703044201988466654330049037966723287359202858707094239324308786436644015392606921228431476063238016562169566232449716819033821294423966293264909
+// Decrypted message: ulteriorNewt's got some moves
