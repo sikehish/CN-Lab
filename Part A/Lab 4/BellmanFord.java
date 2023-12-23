@@ -26,11 +26,6 @@ public class BellmanFord {
                     distance[edge.destination] = distance[edge.source] + edge.weight;
                 }
             }
-        //     System.out.println("Shortest distances from source vertex " + source + ":");
-        // for (int j = 0; j < vertices; j++) {
-        //     System.out.println("To vertex " + j + ": " + distance[j]);
-        // }
-        }
 
           //Checking for negative edge cycle
         for (Edge edge : edges) {
