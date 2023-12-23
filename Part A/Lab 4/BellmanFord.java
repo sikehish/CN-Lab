@@ -26,6 +26,7 @@ public class BellmanFord {
                     distance[edge.destination] = distance[edge.source] + edge.weight;
                 }
             }
+        }
 
           //Checking for negative edge cycle
         for (Edge edge : edges) {
