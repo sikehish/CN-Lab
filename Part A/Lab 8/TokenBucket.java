@@ -30,7 +30,7 @@ public class TokenBucket{
 
 
 
-        System.out.println(String.format("%s\t\t%s\t%s\t%s", "Time", "Tokens Sent", "Packets/Req", "Tokens Remaining in bucket"));
+        System.out.printf("%s\t\t%s\t%s\t%s", "Time", "Tokens Sent", "Packets/Req", "Tokens Remaining in bucket");
 
         for(int i=0;i<n;i++){
 
@@ -50,9 +50,9 @@ public class TokenBucket{
 
             if(tokensInBucket>=requests[i]){
                 tokensInBucket-=requests[i];
-                System.out.println(String.format("%d\t\t%d\t\t%d\t\t%d\t", i + 1,tokenSent, requests[i], tokensInBucket));
+                System.out.printf("%d\t\t%d\t\t%d\t\t%d\t", i + 1,tokenSent, requests[i], tokensInBucket);
             }else{
-                 System.out.println(String.format("%d\t\t%d\t\t%d\t\t%d\t", i + 1,tokenSent, requests[i], tokensInBucket));
+                 System.out.printf("%d\t\t%d\t\t%d\t\t%d\t", i + 1,tokenSent, requests[i], tokensInBucket);
                 System.out.println("More tokens requested than present!Waiting for the bucket to replenish...");
             }
             
