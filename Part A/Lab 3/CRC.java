@@ -9,14 +9,13 @@ public class CRC {
                 rem += "0";
             }
         }
-    
-        for (int i = 0; i < data.length(); i++) {
+
+        for (int i = 0; i < rem.length()-poly.length()+1; i++) {
             if (rem.charAt(i) == '1') {
                 String temp = "";
                 for (int j = 0; j < poly.length(); j++) {
                     temp += (rem.charAt(i + j) == poly.charAt(j)) ? '0' : '1';
                 }
-                System.out.println("HAHAH: "+ temp);
                 rem = rem.substring(0, i) + temp + rem.substring(i + poly.length());
             }
         }
@@ -56,3 +55,11 @@ public class CRC {
         scanner.close();
     }
 }
+
+
+// Enter key/polynomial: 1101
+// Enter Data to be sent: 100100
+// Remainder: 001
+// Codeword: 100100001
+// Enter received codeword: 1001001
+// Error Detected
