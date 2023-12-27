@@ -18,7 +18,7 @@ public class UDPS {
                 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
                 serverSocket.receive(receivePacket);
 
-                String message = new String(receivePacket.getData(), 0, receivePacket.getLength());
+                String message = new String(receivePacket.getData());
                 System.out.println("Client: " + message);
             }
 
