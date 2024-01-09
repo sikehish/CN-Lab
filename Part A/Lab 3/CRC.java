@@ -56,6 +56,7 @@ public class CRC {
     }
 }
 
+//OUTPUT
 
 // Enter key/polynomial: 1101
 // Enter Data to be sent: 100100
@@ -63,3 +64,10 @@ public class CRC {
 // Codeword: 100100001
 // Enter received codeword: 1001001
 // Error Detected
+
+// Enter Data to be sent: 100100
+// Enter key/polynomial: 1101
+// Remainder: 001
+// Codeword: 100100001
+// Enter the received codeword: 100100001
+// No Error
